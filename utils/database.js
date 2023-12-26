@@ -1,11 +1,11 @@
-import  mongoose  from "mongoose";
+import mongoose from "mongoose";
 
 let isConnected = false;
 
 export const connectToDB = async () => {
     mongoose.set('strictQuery', true);
 
-    if(isConnected) {
+    if (isConnected) {
         console.log('MongoDB already Connected');
         return;
     }
@@ -13,14 +13,17 @@ export const connectToDB = async () => {
     try {
         await mongoose.connect(process.env.MONGODB_URI, {
             dbName: 'promptHub',
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-        })
+            // ...other options
+        });
 
         isConnected = true;
 
-        console.log('MongoDB Connected')
+        console.log('MongoDB Connected');
     } catch (error) {
-        console.log(error)
+        isConnected = false;
+        console.error('Error connecting to MongoDB:', error.message);
+        console.error('Error details:', error);
+        throw error;
     }
-}
+};
+
