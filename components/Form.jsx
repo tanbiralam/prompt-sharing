@@ -16,7 +16,7 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
         <span className='font-satoshi font-semibold text-base text-gray-700'>Your AI Prompt</span>
         <textarea
           value={post.prompt}
-          onChange={(e) => setPost({...post, prompt: e.target.value})}
+          onChange={(event) => setPost({...post, prompt: event.target.value})}
           placeholder='Write your prompt here...'
           required
           className='form_textarea'
@@ -37,7 +37,7 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
       </label>
       <div className="flex-end mx-3 mb-5 gap-4">
         <Link href="/" className='text-gray-500 text-sm'>
-          Cancel
+        Cancel
         </Link>
 
         <button
