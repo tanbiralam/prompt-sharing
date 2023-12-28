@@ -45,6 +45,7 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
                 ? "/assets/icons/tick.svg"
                 : "/assets/icons/copy.svg"
             }
+            alt="tick_image"
             width={12}
             height={12}
           />
@@ -56,7 +57,7 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
         className="font-inter text-sm blue_gradient cursor-pointer"
         onClick={() => handleTagClick && handleTagClick(post.tag)}
       >
-        {post.tag}
+        #{post.tag}
       </p>
 
       {session?.user.id === post.creator._id && pathName === "/profile" && (
