@@ -38,15 +38,22 @@ export const PATCH = async (request, { params }) => {
 };
 
 export const DELETE = async (request, { params }) => {
-  const { prompt, tag } = await request.json();
-
   try {
     await connectToDB();
 
-    await Prompt.findByIdAndRemove(params.id);
+    const deletedPrompt = await Prompt.findByIdAndDelete(params.id);
 
-    return new Response("Prompt deleted", { status: 200 });
+    if (!deletedPrompt) {
+      return new Response(JSON.stringify({ message: "Prompt not found" }), { status: 404 });
+    }
+
+    return new Response(JSON.stringify({ message: "Prompt deleted" }), { status: 200 });
+
   } catch (error) {
-    return new Response("Failed to delete prompt", { status: 500 });
+    // Optionally, you can log the error for debugging purposes
+    console.error("Error deleting prompt:", error);
+    
+    return new Response(JSON.stringify({ message: "Failed to delete prompt" }), { status: 500 });
   }
 };
+

@@ -33,18 +33,26 @@ const MyProfile = () => {
 
     if (hasConfirmed) {
       try {
-        await fetch(`/api/prompt/${post._id.toString()}`, {
+        const response = await fetch(`/api/prompt/${post._id.toString()}`, {
           method: "DELETE",
         });
 
-        const filteredPosts = posts.filter((item) => item._id !== post._id);
-
-        setPosts(filteredPosts);
+        if (response.ok) {
+          // Parse the response if needed
+          const data = await response.json();
+          console.log(data.message); // This should log "Prompt deleted"
+          
+          const filteredPosts = posts.filter((p) => p._id !== post._id);
+          setPosts(filteredPosts);
+        } else {
+          console.log("Error:", response.statusText);
+        }
       } catch (error) {
         console.log(error);
       }
     }
-  };
+};
+
 
   return (
     <Profile
