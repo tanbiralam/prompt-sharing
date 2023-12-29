@@ -23,8 +23,8 @@ const UserProfile = ({ params }) => {
 
         const data = await response.json();
         setUserPosts(data);
-      } catch (err) {
-        console.error("Error fetching user posts:", err.message);
+      } catch (error) {
+        console.error("Error fetching user posts:", error.message);
         setError("Failed to fetch user posts. Please try again later.");
       }
     };
