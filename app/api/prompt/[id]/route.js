@@ -50,7 +50,6 @@ export const DELETE = async (request, { params }) => {
     return new Response(JSON.stringify({ message: "Prompt deleted" }), { status: 200 });
 
   } catch (error) {
-    // Optionally, you can log the error for debugging purposes
     console.error("Error deleting prompt:", error);
     
     return new Response(JSON.stringify({ message: "Failed to delete prompt" }), { status: 500 });
