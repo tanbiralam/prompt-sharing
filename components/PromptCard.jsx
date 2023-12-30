@@ -18,7 +18,7 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
 
   return (
     <>
-      <div class="w-72 bg-white rounded-b-lg border-t-8 border-green-400 px-4 py-5 flex flex-col justify-around shadow-md">
+      <div class="w-72 bg-white rounded-b-lg rounded-t-md border-t-8 border-green-400 px-4 py-5 flex flex-col justify-around shadow-md">
         <Image
           src={post.creator.image}
           alt="user_image"
@@ -53,13 +53,24 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
             </button>
 
             {/* Edit and Delete Action  */}
-            
-            <button class="bg-slate-200 px-2 rounded-xl hover:bg-slate-400 transition-colors ease-in-out">
-              Edit
-            </button>
-            <button class="bg-slate-200 px-2 rounded-xl hover:bg-slate-400 transition-colors ease-in-out">
-              Delete
-            </button>
+
+            {session?.user.id === post.creator._id &&
+              pathName === "/profile" && (
+                <div className="text-sm flex gap-2">
+                  <button
+                    class="bg-slate-200 px-2 rounded-xl hover:bg-slate-400 transition-colors ease-in-out"
+                    onClick={handleEdit}
+                  >
+                    Edit
+                  </button>
+                  <button
+                    class="bg-slate-200 px-2 rounded-xl hover:bg-slate-400 transition-colors ease-in-out"
+                    onClick={handleDelete}
+                  >
+                    Delete
+                  </button>
+                </div>
+              )}
           </div>
         </div>
       </div>
