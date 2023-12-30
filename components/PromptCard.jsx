@@ -17,8 +17,9 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
   };
 
   return (
-    <>
-      <div class="w-72 bg-white rounded-b-lg rounded-t-md border-t-8 border-green-400 px-4 py-5 flex flex-col justify-around shadow-md">
+    
+  
+      <div class="prompt_card w-72 bg-white rounded-b-lg rounded-t-md border-t-8 border-green-400  justify-around shadow-md">
         <Image
           src={post.creator.image}
           alt="user_image"
@@ -44,7 +45,9 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
             />
           </div>
           <div class="text-sm flex gap-2">
-            <button class="bg-slate-200 px-2 rounded-xl hover:bg-slate-400 transition-colors ease-in-out capitalize">
+            <button class="bg-slate-200 px-2 rounded-xl hover:bg-slate-400 transition-colors ease-in-out capitalize"         
+            onClick={() => handleTagClick && handleTagClick(post.tag)}
+>
               {post.tag}
             </button>
 
@@ -56,7 +59,7 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
 
             {session?.user.id === post.creator._id &&
               pathName === "/profile" && (
-                <div className="text-sm flex gap-2">
+                <div className="text-sm flex gap-2 font-medium">
                   <button
                     class="bg-slate-200 px-2 rounded-xl hover:bg-slate-400 transition-colors ease-in-out"
                     onClick={handleEdit}
@@ -64,7 +67,7 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
                     Edit
                   </button>
                   <button
-                    class="bg-slate-200 px-2 rounded-xl hover:bg-slate-400 transition-colors ease-in-out"
+                    class="bg-red-500 text-white font-medium px-2 rounded-xl hover:bg-slate-400 transition-colors ease-in-out"
                     onClick={handleDelete}
                   >
                     Delete
@@ -74,7 +77,6 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
           </div>
         </div>
       </div>
-    </>
   );
 };
 
