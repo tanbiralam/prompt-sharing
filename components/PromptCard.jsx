@@ -44,11 +44,21 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
             />
           </div>
           <div class="text-sm flex gap-2">
-            <button class="bg-slate-200 px-2 rounded-xl hover:bg-slate-400 transition-colors ease-in-out">
+            <button class="bg-slate-200 px-2 rounded-xl hover:bg-slate-400 transition-colors ease-in-out capitalize">
               {post.tag}
             </button>
+
             <button class="bg-slate-200 px-2 rounded-xl hover:bg-slate-400 transition-colors ease-in-out">
-              share
+              Share
+            </button>
+
+            {/* Edit and Delete Action  */}
+            
+            <button class="bg-slate-200 px-2 rounded-xl hover:bg-slate-400 transition-colors ease-in-out">
+              Edit
+            </button>
+            <button class="bg-slate-200 px-2 rounded-xl hover:bg-slate-400 transition-colors ease-in-out">
+              Delete
             </button>
           </div>
         </div>
