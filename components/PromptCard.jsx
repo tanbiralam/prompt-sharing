@@ -38,7 +38,37 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
       // .catch((error) => console.log('Error copying URL:', error));
     }
   }
+
+  function generateRandomColor() {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6;  i++) {
+      color += letters[Math.floor(Math.random() * 16)]
+    }
+    return color;
+  }
+
+  function getTextColor(bgColor) {
+    // Convert the hex color to RGB
+    const hexToRgb = (hex) => {
+      const bigint = parseInt(hex.replace("#", ""), 16);
+      return {
+        r: (bigint >> 16) & 255,
+        g: (bigint >> 8) & 255,
+        b: bigint & 255,
+      };
+    };
   
+    // Calculate the luminance of the background color
+    const rgb = hexToRgb(bgColor);
+    const luminance = (0.299 * rgb.r + 0.587 * rgb.g + 0.114 * rgb.b) / 255;
+  
+    // Return white text for dark backgrounds and black text for light backgrounds
+    return luminance > 0.5 ? "#000000" : "#FFFFFF";
+  }
+  
+  const bgColor = generateRandomColor();
+  const textColor = getTextColor(bgColor);
 
   return (
     
@@ -69,13 +99,16 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
             />
           </div>
           <div class="text-sm flex gap-2">
-            <button class="bg-slate-200 px-2 rounded-xl hover:bg-slate-400 transition-colors ease-in-out capitalize"         
+            <button class="bg-slate-200 px-2 font-medium rounded-xl hover:bg-slate-400 transition-colors ease-in-out capitalize"         
             onClick={() => handleTagClick && handleTagClick(post.tag)}
->
+            style={{ 
+              backgroundColor: bgColor,
+              color: textColor 
+            }}>
               {post.tag}
             </button>
 
-            <button class="bg-slate-200 px-2 rounded-xl hover:bg-slate-400 transition-colors ease-in-out"   
+            <button class="bg-slate-200 px-2 font-medium rounded-xl hover:bg-slate-400 transition-colors ease-in-out"   
             onClick={() => handleShareClick(post.prompt)}
 >
               Share
