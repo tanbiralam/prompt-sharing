@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
+import { RWebShare } from "react-web-share"
 
 const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
   const [copied, setCopied] = useState("");
@@ -15,6 +16,29 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
     navigator.clipboard.writeText(post.prompt);
     setTimeout(() => setCopied(""), 3000);
   };
+
+  function handleShareClick(tag) {
+    // Open a share dialog or copy a link
+    // For example, using the Web Share API to show native sharing options
+    if (navigator.share) {
+      navigator.share({
+        title: 'Share this post',
+        text: `Check out this post with tag: ${prompt}`,
+        url:"http://localhost:3000",
+      })
+      .then(() => console.log('Shared successfully'))
+      .catch((error) => console.log('Error sharing:', error));
+    } else {
+      // Fallback for browsers that do not support the Web Share API
+      // Here you can implement your own custom sharing logic, such as copying a link
+      console.log('Web Share API not supported');
+      // For example, you could copy the URL to the clipboard:
+      // navigator.clipboard.writeText(window.location.href)
+      // .then(() => console.log('URL copied to clipboard'))
+      // .catch((error) => console.log('Error copying URL:', error));
+    }
+  }
+  
 
   return (
     
@@ -51,7 +75,9 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
               {post.tag}
             </button>
 
-            <button class="bg-slate-200 px-2 rounded-xl hover:bg-slate-400 transition-colors ease-in-out">
+            <button class="bg-slate-200 px-2 rounded-xl hover:bg-slate-400 transition-colors ease-in-out"   
+            onClick={() => handleShareClick(post.prompt)}
+>
               Share
             </button>
 
