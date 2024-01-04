@@ -61,9 +61,6 @@ Contributions are welcome! To contribute to the Prompt Sharing App:
 
 Please ensure that your contributions adhere to the coding standards and guidelines of the project.
 
-## License
-
-The Prompt Hub App is open-source software licensed under the [MIT License](LICENSE).
 
 
 
