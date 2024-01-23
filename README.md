@@ -60,6 +60,7 @@ Contributions are welcome! To contribute to the Prompt Sharing App:
 5. Create a new Pull Request.
 
 Please ensure that your contributions adhere to the coding standards and guidelines of the project.
+Thank You!
 
 
 
